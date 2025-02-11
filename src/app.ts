@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 
 dotenv.config();
-
+console.clear();
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
