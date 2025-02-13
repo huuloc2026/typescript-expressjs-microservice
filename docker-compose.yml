@@ -1,21 +1,22 @@
-version: '3'
+version: "3"
 
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mysql-microservice
+  postgres:
+    image: postgres:16
+    container_name: postgres-microservice
     restart: always
     ports:
-      - "3306:3306"
+      - "5435:5432"
     environment:
-      - MYSQL_ROOT_PASSWORD=huuloc2026
-      - MYSQL_DATABASE=social_network
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=huuloc2026
+      - POSTGRES_DB=8663-microservices
     volumes:
-      - social_mysql:/var/lib/mysql
+      - social_postgres:/var/lib/postgresql/data
     networks:
       - social
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      test: ["CMD-SHELL", "pg_isready -U root"]
       timeout: 20s
       retries: 10
 
@@ -23,4 +24,4 @@ networks:
   social:
 
 volumes:
-  social_mysql:
+  social_postgres:
